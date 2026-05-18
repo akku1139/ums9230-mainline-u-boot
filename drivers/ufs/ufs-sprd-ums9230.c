@@ -69,13 +69,6 @@ static int ufs_sprd_probe(struct udevice *dev)
 	return 0;
 }
 
-static int ufs_sprd_bind(struct udevice *dev)
-{
-	struct udevice *scsi_dev;
-
-	return ufs_scsi_bind(dev, &scsi_dev);
-}
-
 static const struct udevice_id ufs_sprd_ids[] = {
 	{ .compatible = "sprd,ums9230-ufs" },
 	{ }
@@ -86,6 +79,5 @@ U_BOOT_DRIVER(ufs_sprd_ums9230) = {
 	.id		= UCLASS_UFS,
 	.of_match	= ufs_sprd_ids,
 	.probe		= ufs_sprd_probe,
-	.bind		= ufs_sprd_bind,
 	.priv_auto	= sizeof(struct ufs_sprd_priv),
 };
