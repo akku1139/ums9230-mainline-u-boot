@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2026 Akari Tsuyukusa
+ */
+
+/dts-v1/;
+
+#include "ums9230.dtsi"
+
+/ {
+	model = "Blackview Tab 15 Pro";
+
+	compatible = "doke,blackview-tab15pro", "sprd,ums9230";
+
+	aliases {
+	};
+
+	chosen {
+		framebuffer {
+			compatible = "simple-framebuffer";
+			memory-region = <&framebuffer_region>;
+			width = <1200>;
+			height = <1920>;
+			stride = <(1920 * 4)>;
+			format = "a8r8g8b8";
+
+			status = "okay";
+		};
+	};
+
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0x00 0x80000000 0x01 0xfffff000>;
+	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+
+		framebuffer_region: framebuffer-region@9e000000 {
+			compatible = "framebuffer";
+			reg = <0 0x9e000000 0 (1920 * 1200 * 4)>;
+			no-map;
+		};
+
+		ramoops@fff80000 {
+			compatible = "ramoops";
+			reg = <0x0 0xfff80000 0x0 0x40000>;
+			console-size = <0x8000>;
+			record-size = <0x8000>;
+			pmsg-size = <0x8000>;
+		};
+	};
+};
+
+&usb {
+	status = "okay";
+};
