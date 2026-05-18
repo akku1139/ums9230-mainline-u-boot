@@ -53,6 +53,10 @@
 	};
 };
 
+&sdio0 {
+        status = "okay";
+};
+
 &usb {
 	status = "okay";
 };
