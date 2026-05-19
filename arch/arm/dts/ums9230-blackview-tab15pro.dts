@@ -54,7 +54,7 @@
 };
 
 &sdio0 {
-        status = "okay";
+	status = "okay";
 };
 
 &usb {
